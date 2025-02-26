@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="4.10.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.13" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MailMimic.ExchangeServer\MailMimic.ExchangeServer.csproj" />
+    <ProjectReference Include="..\MailMimic.Portal\MailMimic.Portal.csproj" />
   </ItemGroup>
 
 </Project>

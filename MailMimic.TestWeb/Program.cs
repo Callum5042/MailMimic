@@ -1,4 +1,5 @@
 using MailMimic.ExchangeServer.Extensions;
+using MailMimic.Portal.Extensions;
 
 namespace MailMimic.TestWeb;
 
@@ -12,6 +13,7 @@ public class Program
         builder.Services.AddControllersWithViews();
 
         builder.Services.AddMailMimic();
+        builder.Services.AddMailMimicPortal();
 
         var app = builder.Build();
 

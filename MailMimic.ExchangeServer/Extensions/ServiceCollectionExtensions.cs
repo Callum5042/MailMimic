@@ -5,10 +5,12 @@ namespace MailMimic.ExchangeServer.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddMailMimic(this IServiceCollection services)
+    public static IServiceCollection AddMailMimic(this IServiceCollection services)
     {
         services.AddHostedService<MailExchangeService>();
 
         services.AddSingleton<IMimicStore, InMemoryMimicStore>();
+
+        return services;
     }
 }
