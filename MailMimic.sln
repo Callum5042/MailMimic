@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMimic", "MailMimic\Mail
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMimic.ExchangeServer", "MailMimic.ExchangeServer\MailMimic.ExchangeServer.csproj", "{AAE2BC21-58F0-4C1D-9DC9-83DCEE58BB61}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4E33385-285D-436B-8AD3-53897545C38A}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMimic.TestWeb", "MailMimic.TestWeb\MailMimic.TestWeb.csproj", "{5F1FB063-DAC1-41BF-ACCA-9B8B236A582E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +28,10 @@ Global
 		{AAE2BC21-58F0-4C1D-9DC9-83DCEE58BB61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAE2BC21-58F0-4C1D-9DC9-83DCEE58BB61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAE2BC21-58F0-4C1D-9DC9-83DCEE58BB61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F1FB063-DAC1-41BF-ACCA-9B8B236A582E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F1FB063-DAC1-41BF-ACCA-9B8B236A582E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F1FB063-DAC1-41BF-ACCA-9B8B236A582E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F1FB063-DAC1-41BF-ACCA-9B8B236A582E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

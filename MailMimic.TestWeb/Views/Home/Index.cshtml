@@ -1,0 +1,48 @@
+﻿@model SendEmailModel
+
+@{
+    ViewData["Title"] = "Send Email";
+}
+
+@if (ViewBag.EmailSent)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Email sent successfully!</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<form asp-controller="Home" asp-action="SendEmail">
+
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <label asp-for="MailFrom"></label>
+            <input asp-for="MailFrom" class="form-control" />
+        </div>
+
+        <div class="form-group col-md-6">
+            <label asp-for="MailTo"></label>
+            <input asp-for="MailTo" class="form-control" />
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label asp-for="Subject"></label>
+            <input asp-for="Subject" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label asp-for="Body"></label>
+            <textarea asp-for="Body" class="form-control" rows="10"></textarea>
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary mt-3">Send Email</button>
+
+</form>
