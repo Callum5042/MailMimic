@@ -16,7 +16,7 @@
                     <td>@item.DateTime</td>
                     <td>@item.Size</td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-info">View</button>
+                        <a class="btn btn-sm btn-info" asp-controller="Mailbox" asp-action="Email" asp-route-id="@item.Id">View</a>
                         <button type="button" class="btn btn-sm btn-danger">Delete</button>
                     </td>
                 </tr>

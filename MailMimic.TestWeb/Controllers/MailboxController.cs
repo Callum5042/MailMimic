@@ -32,4 +32,12 @@ public class MailboxController : Controller
 
         return View(model);
     }
+
+    [Route("[controller]/{id:guid}")]
+    public async Task<IActionResult> Email(Guid id)
+    {
+        var model = await _mimicStore.FindAsync(id);
+
+        return View(model);
+    }
 }
