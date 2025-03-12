@@ -13,5 +13,15 @@ public class MimicMessage
 
     public IList<string> MailTo { get; set; } = [];
 
-    public string? Body { get; set; }
+    public string? Source { get; set; }
+
+    public string Subject 
+    {
+        get
+        {
+            return "Test Subject";
+        }
+    }
+
+    public DateTime DateTime { get; set; } = DateTime.UtcNow;
 }

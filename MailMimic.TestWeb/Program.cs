@@ -32,6 +32,8 @@ public class Program
 
         app.UseAuthorization();
 
+        app.MapMailMimicPortal();
+
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");

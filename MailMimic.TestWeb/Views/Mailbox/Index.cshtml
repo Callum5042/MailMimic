@@ -1,0 +1,34 @@
+﻿@model MailboxModel
+
+@{
+    ViewBag.Title = "Mailbox";
+}
+
+@if (Model.Emails.Any())
+{
+    <table class="table table-striped table-hover">
+        <tbody>
+            @foreach (var item in Model.Emails)
+            {
+                <tr>
+                    <td>@item.MailFrom</td>
+                    <td>@item.Subject</td>
+                    <td>@item.DateTime</td>
+                    <td>@item.Size</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-info">View</button>
+                        <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="row">
+        <alert class="alert alert-info">
+            <strong>Mailbox is empty</strong>
+        </alert>
+    </div>
+}

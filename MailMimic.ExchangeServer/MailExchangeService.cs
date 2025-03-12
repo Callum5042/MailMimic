@@ -94,7 +94,7 @@ public class MailExchangeService : BackgroundService
                 Console.WriteLine("Message received:");
                 Console.WriteLine(messageBuilder.ToString());
 
-                mimicMessage.Body = messageBuilder.ToString();
+                mimicMessage.Source = messageBuilder.ToString();
                 await _mimicStore.AddAsync(mimicMessage);
 
                 await writer.WriteLineAsync("250 Message accepted");
