@@ -1,10 +1,11 @@
 ﻿using MailMimic.ExchangeServer.MailStores;
-using MailMimic.TestWeb.Models;
+using MailMimic.Portal.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
-namespace MailMimic.TestWeb.Controllers;
+namespace MailMimic.Portal.Controllers;
 
+[Area("MailMimic")]
 public class MailboxController : Controller
 {
     private readonly IMimicStore _mimicStore;
@@ -30,14 +31,14 @@ public class MailboxController : Controller
             })
         };
 
-        return View(model);
+        return View("~/Views/Mailbox/Index.cshtml", model);
     }
 
-    [Route("[controller]/{id:guid}")]
+    [Route("[area]/[controller]/{id:guid}")]
     public async Task<IActionResult> Email(Guid id)
     {
         var model = await _mimicStore.FindAsync(id);
 
-        return View(model);
+        return View("~/Views/Mailbox/Email.cshtml", model);
     }
 }

@@ -1,4 +1,5 @@
-﻿@model MailboxModel
+﻿@using MailMimic.Portal.Models
+@model MailboxModel
 
 @{
     ViewBag.Title = "Mailbox";
@@ -16,7 +17,7 @@
                     <td>@item.DateTime</td>
                     <td>@item.Size</td>
                     <td>
-                        <a class="btn btn-sm btn-info" asp-controller="Mailbox" asp-action="Email" asp-route-id="@item.Id">View</a>
+                        <a class="btn btn-sm btn-info" asp-area="MailMimic" asp-controller="Mailbox" asp-action="Email" asp-route-id="@item.Id">View</a>
                         <button type="button" class="btn btn-sm btn-danger">Delete</button>
                     </td>
                 </tr>

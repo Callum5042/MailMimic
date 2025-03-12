@@ -12,11 +12,11 @@ public static class ServiceCollectionExtensions
         // services.AddMailMimic();
 
         services.AddControllersWithViews()
-            .AddApplicationPart(typeof(MailController).Assembly);
+            .AddApplicationPart(typeof(MailboxController).Assembly);
 
         services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
         {
-            options.FileProviders.Add(new EmbeddedFileProvider(typeof(MailController).Assembly));
+            options.FileProviders.Add(new EmbeddedFileProvider(typeof(MailboxController).Assembly));
         });
 
         return services;

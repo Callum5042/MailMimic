@@ -1,4 +1,4 @@
-﻿namespace MailMimic.TestWeb.Models;
+﻿namespace MailMimic.Portal.Models;
 
 #nullable disable
 
