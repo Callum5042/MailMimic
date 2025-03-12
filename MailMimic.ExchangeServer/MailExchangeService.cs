@@ -88,13 +88,14 @@ public class MailExchangeService : BackgroundService
                 {
                     if (line == ".")
                         break;
+
                     messageBuilder.AppendLine(line);
                 }
 
                 Console.WriteLine("Message received:");
                 Console.WriteLine(messageBuilder.ToString());
 
-                mimicMessage.Source = messageBuilder.ToString();
+                mimicMessage.SetSource(messageBuilder.ToString());
                 await _mimicStore.AddAsync(mimicMessage);
 
                 await writer.WriteLineAsync("250 Message accepted");
