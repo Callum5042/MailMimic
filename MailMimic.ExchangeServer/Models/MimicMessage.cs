@@ -39,8 +39,9 @@ public class MimicMessage
             {
                 if (line.Contains(":"))
                 {
-                    var headerLine = line.Split(":");
-                    Headers.Add(headerLine[0].Trim(), headerLine[1].Trim());
+                    var parts = line.Split([':'], 2);
+
+                    Headers.Add(parts[0].Trim(), parts[1].Trim());
                 }
                 else
                 {
@@ -57,5 +58,11 @@ public class MimicMessage
 
         // Body
         Body = body.ToString();
+        Source = source;
+
+        if (Headers.TryGetValue("Subject", out string? value))
+        {
+            Subject = value;
+        }
     }
 }

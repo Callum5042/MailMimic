@@ -41,4 +41,33 @@ public class HomeController : Controller
             emailSent = true 
         });
     }
+
+    [HttpPost]
+    public async Task<IActionResult> QuickSendEmail()
+    {
+        // Build the email
+        var message = new MimeMessage();
+        message.From.Add(new MailboxAddress("RoveTech", "from@rovetech.com"));
+        message.To.Add(new MailboxAddress("Neo", "neo@matrix.com"));
+        message.To.Add(new MailboxAddress("Morpheus", "morpheus@matrix.com"));
+        message.Cc.Add(new MailboxAddress("The Architect", "architect@matrix.com"));
+        message.Subject = "Quick Send Email Test";
+
+        message.Body = new TextPart("plain")
+        {
+            Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet rutrum suscipit. Nulla ut turpis nec est finibus posuere ac a velit. Donec aliquet ex sed turpis imperdiet sollicitudin. In euismod, nisl vitae aliquet gravida, eros ex tempus quam, eget congue erat quam vel ex. Suspendisse nec felis nec ligula commodo vehicula. Mauris facilisis augue sem, non cursus metus laoreet ac. Sed sit amet purus scelerisque, efficitur turpis eget, efficitur quam. Vestibulum aliquet orci nec leo iaculis ultrices. Sed in felis congue, scelerisque diam vitae, consectetur arcu. Cras vel enim at velit placerat porttitor. Vestibulum id neque urna. Donec auctor aliquam pellentesque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+        };
+
+        // Send the email
+        using var client = new SmtpClient();
+        await client.ConnectAsync("localhost", 587, false);
+        await client.SendAsync(message);
+        await client.DisconnectAsync(true);
+
+        // Redirect back to the index page
+        return RedirectToAction(nameof(Index), new 
+        { 
+            emailSent = true 
+        });
+    }
 }

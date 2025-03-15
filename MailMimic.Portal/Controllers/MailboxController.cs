@@ -26,7 +26,7 @@ public class MailboxController : Controller
                 Id = x.Id,
                 MailFrom = x.MailFrom.FirstOrDefault(),
                 Subject = x.Subject,
-                Size = $"{Encoding.Unicode.GetByteCount(x.Source!)} bytes",
+                Size = $"{Encoding.Unicode.GetByteCount(x.Source ?? string.Empty)} bytes",
                 DateTime = x.DateTime.ToString("yyyy-MM-dd HH:mm:ss"),
             })
         };
@@ -38,7 +38,6 @@ public class MailboxController : Controller
     public async Task<IActionResult> Email(Guid id)
     {
         var model = await _mimicStore.FindAsync(id);
-
         return View("~/Views/Mailbox/Email.cshtml", model);
     }
 }

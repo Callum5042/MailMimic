@@ -1,8 +1,13 @@
 ﻿@model MailMimic.ExchangeServer.Models.MimicMessage
 
-<h1>Email</h1>
-
 <div class="row">
+
+    <h2>@Model.Subject</h2>
+    <strong>From: @Model.Headers["From"]</strong>
+    <strong>To: @Model.Headers["To"]</strong>
+    <strong>Cc: @Model.Headers["Cc"]</strong>
+    <strong>Date: @Model.Headers["Date"]</strong>
+    <hr />
 
     <pre>@Model.Source</pre>
 
