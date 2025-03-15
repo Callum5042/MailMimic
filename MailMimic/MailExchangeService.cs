@@ -1,12 +1,12 @@
-﻿using MailMimic.ExchangeServer.MailStores;
-using MailMimic.ExchangeServer.Models;
+﻿using MailMimic.MailStores;
+using MailMimic.Models;
 using Microsoft.Extensions.Hosting;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MailMimic.ExchangeServer;
+namespace MailMimic;
 
 public class MailExchangeService : BackgroundService
 {

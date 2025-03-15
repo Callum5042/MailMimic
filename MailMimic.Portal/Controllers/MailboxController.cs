@@ -1,4 +1,4 @@
-﻿using MailMimic.ExchangeServer.MailStores;
+﻿using MailMimic.MailStores;
 using MailMimic.Portal.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;

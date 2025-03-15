@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MailMimic.ExchangeServer\MailMimic.ExchangeServer.csproj" />
     <ProjectReference Include="..\MailMimic.Portal\MailMimic.Portal.csproj" />
+    <ProjectReference Include="..\MailMimic\MailMimic.csproj" />
   </ItemGroup>
 
 </Project>

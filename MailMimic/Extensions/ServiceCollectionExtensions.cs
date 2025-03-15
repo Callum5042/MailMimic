@@ -1,7 +1,7 @@
-﻿using MailMimic.ExchangeServer.MailStores;
+﻿using MailMimic.MailStores;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MailMimic.ExchangeServer.Extensions;
+namespace MailMimic.Extensions;
 
 public static class ServiceCollectionExtensions
 {

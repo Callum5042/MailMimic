@@ -1,4 +1,4 @@
-using MailMimic.ExchangeServer.Extensions;
+using MailMimic.Extensions;
 using MailMimic.Portal.Extensions;
 
 namespace MailMimic.TestWeb;

@@ -1,7 +1,7 @@
-﻿using MailMimic.ExchangeServer.Models;
+﻿using MailMimic.Models;
 using System.Collections.Concurrent;
 
-namespace MailMimic.ExchangeServer.MailStores;
+namespace MailMimic.MailStores;
 
 public class InMemoryMimicStore : IMimicStore
 {

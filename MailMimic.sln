@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailMimic", "MailMimic\MailMimic.csproj", "{BF8789E4-51BC-4CB9-B5A2-C1E7310132CD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailMimic.ExchangeServer", "MailMimic.ExchangeServer\MailMimic.ExchangeServer.csproj", "{AAE2BC21-58F0-4C1D-9DC9-83DCEE58BB61}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4E33385-285D-436B-8AD3-53897545C38A}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
@@ -16,20 +12,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailMimic.TestWeb", "MailMi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMimic.Portal", "MailMimic.Portal\MailMimic.Portal.csproj", "{B1175D3E-8137-4E44-9937-FED8B7EB6F22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMimic", "MailMimic\MailMimic.csproj", "{D7FD43CB-CA8A-5289-DB89-BC2D14F3A1F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BF8789E4-51BC-4CB9-B5A2-C1E7310132CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF8789E4-51BC-4CB9-B5A2-C1E7310132CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF8789E4-51BC-4CB9-B5A2-C1E7310132CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF8789E4-51BC-4CB9-B5A2-C1E7310132CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AAE2BC21-58F0-4C1D-9DC9-83DCEE58BB61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAE2BC21-58F0-4C1D-9DC9-83DCEE58BB61}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAE2BC21-58F0-4C1D-9DC9-83DCEE58BB61}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAE2BC21-58F0-4C1D-9DC9-83DCEE58BB61}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5F1FB063-DAC1-41BF-ACCA-9B8B236A582E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F1FB063-DAC1-41BF-ACCA-9B8B236A582E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F1FB063-DAC1-41BF-ACCA-9B8B236A582E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -38,6 +28,10 @@ Global
 		{B1175D3E-8137-4E44-9937-FED8B7EB6F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1175D3E-8137-4E44-9937-FED8B7EB6F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1175D3E-8137-4E44-9937-FED8B7EB6F22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7FD43CB-CA8A-5289-DB89-BC2D14F3A1F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7FD43CB-CA8A-5289-DB89-BC2D14F3A1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7FD43CB-CA8A-5289-DB89-BC2D14F3A1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7FD43CB-CA8A-5289-DB89-BC2D14F3A1F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

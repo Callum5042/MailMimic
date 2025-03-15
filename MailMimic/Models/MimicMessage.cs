@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace MailMimic.ExchangeServer.Models;
+namespace MailMimic.Models;
 
 public class MimicMessage
 {

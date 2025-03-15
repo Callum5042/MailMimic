@@ -1,6 +1,6 @@
-﻿using MailMimic.ExchangeServer.Models;
+﻿using MailMimic.Models;
 
-namespace MailMimic.ExchangeServer.MailStores;
+namespace MailMimic.MailStores;
 
 public interface IMimicStore
 {
