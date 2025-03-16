@@ -2,8 +2,12 @@
 using MailMimic.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.Net;
+using System.Net.Security;
 using System.Net.Sockets;
+using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -13,11 +17,13 @@ public class MailExchangeService : BackgroundService
 {
     private readonly IMimicStore _mimicStore;
     private readonly ILogger<MailExchangeService> _logger;
+    private readonly IOptions<MailMimicConfig> _options;
 
-    public MailExchangeService(IMimicStore mimicStore, ILogger<MailExchangeService> logger)
+    public MailExchangeService(IMimicStore mimicStore, ILogger<MailExchangeService> logger, IOptions<MailMimicConfig> options)
     {
         _mimicStore = mimicStore;
         _logger = logger;
+        _options = options;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -25,7 +31,7 @@ public class MailExchangeService : BackgroundService
         using var scope = _logger.BeginScope("{Service}", nameof(MailExchangeService));
         _logger.LogInformation("starting SMTP server");
 
-        var tcpServer = new TcpListener(IPAddress.Loopback, 587);
+        var tcpServer = new TcpListener(IPAddress.Loopback, _options.Value.Port);
         tcpServer.Start();
 
         _logger.LogInformation("SMTP server is running");
@@ -40,13 +46,59 @@ public class MailExchangeService : BackgroundService
         }
     }
 
+    private X509Certificate2 LoadCertificate(string thumbprint)
+    {
+        using var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+        store.Open(OpenFlags.ReadOnly);
+
+        var certs = store.Certificates.Find(X509FindType.FindByThumbprint, thumbprint, validOnly: true);
+        if (!certs.Any())
+        {
+            throw new Exception("Unable to find X509 certificate");
+        }
+
+        return certs[0];
+    }
+
+    private static X509Certificate2 GetDevelopmentCertificate()
+    {
+        using var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+        store.Open(OpenFlags.ReadOnly);
+
+        var certs = store.Certificates.Find(X509FindType.FindBySubjectName, "localhost", validOnly: false);
+        if (!certs.Any())
+        {
+            throw new Exception("Unable to find X509 certificate");
+        }
+
+        return certs[0];
+    }
+
     private async Task HandleSmtpSession(TcpClient client, CancellationToken cancellationToken)
     {
         // RFC 5321, Section 3 - The SMTP Procedures: An Overview
-
         using var networkStream = client.GetStream();
-        using var reader = new StreamReader(networkStream, Encoding.ASCII);
-        using var writer = new StreamWriter(networkStream, Encoding.ASCII) { AutoFlush = true };
+
+        var useSsl = _options.Value.UseSsl;
+        using var sslStream = new SslStream(client.GetStream(), false);
+        if (useSsl)
+        {
+            X509Certificate2? serverCertificate = null;
+            if (string.IsNullOrEmpty(_options.Value.SslThumbprint))
+            {
+                serverCertificate = GetDevelopmentCertificate();
+            }
+            else
+            {
+                serverCertificate = LoadCertificate(_options.Value.SslThumbprint);
+            }
+
+            await sslStream.AuthenticateAsServerAsync(serverCertificate, clientCertificateRequired: false, SslProtocols.Tls12, true);
+        }
+
+        using var reader = new StreamReader(useSsl ? sslStream : networkStream, Encoding.ASCII);
+        using var writer = new StreamWriter(useSsl ? sslStream : networkStream, Encoding.ASCII) { AutoFlush = true };
+
 
         // RFC 5321, Section 3.1 - Session Initiation
         await writer.WriteLineAsync("220 MailMimic SMTP ready");

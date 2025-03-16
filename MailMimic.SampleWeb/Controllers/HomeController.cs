@@ -31,7 +31,7 @@ public class HomeController : Controller
 
         // Send the email
         using var client = new SmtpClient();
-        await client.ConnectAsync("localhost", 587, false);
+        await client.ConnectAsync("localhost", 465, useSsl: true);
         await client.SendAsync(message);
         await client.DisconnectAsync(true);
 
@@ -66,7 +66,7 @@ public class HomeController : Controller
 
         // Send the email
         using var client = new SmtpClient();
-        await client.ConnectAsync("localhost", 587, false);
+        await client.ConnectAsync("localhost", 465, useSsl: true);
         await client.SendAsync(message);
         await client.DisconnectAsync(true);
 

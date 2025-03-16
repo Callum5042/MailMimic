@@ -10,6 +10,7 @@ public static class ServiceCollectionExtensions
         services.AddHostedService<MailExchangeService>();
 
         services.AddSingleton<IMimicStore, InMemoryMimicStore>();
+        services.AddOptions<MailMimicConfig>();
 
         return services;
     }
