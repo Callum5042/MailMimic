@@ -1,4 +1,4 @@
-namespace MailMimic.TestWeb.Models;
+namespace MailMimic.SampleWeb.Models;
 
 public class ErrorViewModel
 {

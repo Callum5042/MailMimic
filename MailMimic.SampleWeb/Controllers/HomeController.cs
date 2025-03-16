@@ -1,9 +1,9 @@
 using MailKit.Net.Smtp;
-using MailMimic.TestWeb.Models;
+using MailMimic.SampleWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 
-namespace MailMimic.TestWeb.Controllers;
+namespace MailMimic.SampleWeb.Controllers;
 
 public class HomeController : Controller
 {

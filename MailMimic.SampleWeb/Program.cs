@@ -1,7 +1,7 @@
 using MailMimic.Extensions;
 using MailMimic.Portal.Extensions;
 
-namespace MailMimic.TestWeb;
+namespace MailMimic.SampleWeb;
 
 public class Program
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MailMimic.TestWeb.Models;
+namespace MailMimic.SampleWeb.Models;
 
 #nullable disable
 
