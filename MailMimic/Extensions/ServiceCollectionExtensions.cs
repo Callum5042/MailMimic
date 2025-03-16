@@ -1,4 +1,5 @@
 ﻿using MailMimic.MailStores;
+using MailMimic.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MailMimic.Extensions;
@@ -45,6 +46,8 @@ public static class ServiceCollectionExtensions
     {
         services.AddHostedService<MailExchangeService>();
         services.AddSingleton<IMimicStore, InMemoryMimicStore>();
+        services.AddTransient<ICertificateLoader, CertificateLoader>();
+        services.AddTransient<ISmtpSession, SmtpSession>();
 
         return services;
     }
