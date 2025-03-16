@@ -1,6 +1,7 @@
 ﻿using MailMimic.MailStores;
 using MailMimic.Models;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -11,22 +12,28 @@ namespace MailMimic;
 public class MailExchangeService : BackgroundService
 {
     private readonly IMimicStore _mimicStore;
+    private readonly ILogger<MailExchangeService> _logger;
 
-    public MailExchangeService(IMimicStore mimicStore)
+    public MailExchangeService(IMimicStore mimicStore, ILogger<MailExchangeService> logger)
     {
         _mimicStore = mimicStore;
+        _logger = logger;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        using var scope = _logger.BeginScope("{Service}", nameof(MailExchangeService));
+        _logger.LogInformation("starting SMTP server");
+
         var tcpServer = new TcpListener(IPAddress.Loopback, 587);
         tcpServer.Start();
-        Console.WriteLine("SMTP server is running...");
+
+        _logger.LogInformation("SMTP server is running");
 
         while (!stoppingToken.IsCancellationRequested)
         {
             var client = await tcpServer.AcceptTcpClientAsync(stoppingToken);
-            Console.WriteLine("Client connected.");
+            _logger.LogInformation("Client connected");
 
             // Handle the SMTP session
             _ = Task.Run(() => HandleSmtpSession(client, stoppingToken));
@@ -49,7 +56,7 @@ public class MailExchangeService : BackgroundService
         var line = await reader.ReadLineAsync(cancellationToken);
         while (!string.IsNullOrEmpty(line))
         {
-            Console.WriteLine($"Received: {line}");
+            _logger.LogInformation("Received: " + line);
 
             // Respond to specific SMTP commands
             if (line.StartsWith("EHLO", StringComparison.OrdinalIgnoreCase))
@@ -92,8 +99,8 @@ public class MailExchangeService : BackgroundService
                     messageBuilder.AppendLine(line);
                 }
 
-                Console.WriteLine("Message received:");
-                Console.WriteLine(messageBuilder.ToString());
+                //Console.WriteLine("Message received:");
+                //Console.WriteLine(messageBuilder.ToString());
 
                 mimicMessage.SetSource(messageBuilder.ToString());
                 await _mimicStore.AddAsync(mimicMessage);
@@ -114,7 +121,7 @@ public class MailExchangeService : BackgroundService
             line = await reader.ReadLineAsync(cancellationToken);
         }
 
-        Console.WriteLine("Client disconnected.");
+        _logger.LogInformation("Client disconnected");
         client.Dispose();
     }
 }
