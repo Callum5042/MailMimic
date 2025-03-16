@@ -14,7 +14,6 @@ public class Program
 
         builder.Services.AddMailMimic();
         builder.Services.AddMailMimicPortal();
-        builder.Services.Configure<MailMimicConfig>(builder.Configuration.GetSection(nameof(MailMimicConfig)));
 
         var app = builder.Build();
 
