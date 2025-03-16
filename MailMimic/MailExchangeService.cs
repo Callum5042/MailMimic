@@ -38,6 +38,7 @@ public class MailExchangeService : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             var client = await tcpServer.AcceptTcpClientAsync(stoppingToken);
+
             _logger.LogInformation("Client connected");
 
             // Handle the SMTP session

@@ -3,6 +3,7 @@ using MailMimic.Models;
 using System.Text.RegularExpressions;
 using System.Text;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace MailMimic.Services;
 
@@ -10,11 +11,13 @@ public class SmtpSession : ISmtpSession
 {
     private readonly ILogger<SmtpSession> _logger;
     private readonly IMimicStore _mimicStore;
+    private readonly IOptions<MailMimicConfig> _mailMimicConfig;
 
-    public SmtpSession(ILogger<SmtpSession> logger, IMimicStore mimicStore)
+    public SmtpSession(ILogger<SmtpSession> logger, IMimicStore mimicStore, IOptions<MailMimicConfig> mailMimicConfig)
     {
         _logger = logger;
         _mimicStore = mimicStore;
+        _mailMimicConfig = mailMimicConfig;
     }
 
     public async Task HandleAsync(Stream stream, CancellationToken cancellationToken)
@@ -42,6 +45,14 @@ public class SmtpSession : ISmtpSession
 
                 const string domain = "localhost";
                 await writer.WriteLineAsync($"250-Hello {domain} MailMimic");
+                await writer.WriteLineAsync("250-AUTH PLAIN LOGIN");
+
+                if (_mailMimicConfig.Value.UseSsl)
+                {
+                    // rfc8689
+                    await writer.WriteLineAsync("250-STARTTLS");
+                }
+
                 await writer.WriteLineAsync("250 OK");
             }
             else if (line.StartsWith("MAIL FROM:", StringComparison.OrdinalIgnoreCase))
@@ -84,6 +95,35 @@ public class SmtpSession : ISmtpSession
             {
                 await writer.WriteLineAsync("221 Bye");
                 break;
+            }
+            else if (line.StartsWith("AUTH", StringComparison.OrdinalIgnoreCase))
+            {
+                var tmp = line.Replace("AUTH PLAIN", "");
+
+                var data = Convert.FromBase64String(tmp);
+                var decodedString = Encoding.UTF8.GetString(data);
+
+                // Split by null character
+                var parts = decodedString.Split('\0');
+
+                if (parts.Length == 3) // Ensure the correct format
+                {
+                    var username = parts[1]; // Second part is the username
+                    var password = parts[2]; // Third part is t
+
+                    if (username == _mailMimicConfig.Value.Username && password == _mailMimicConfig.Value.Password)
+                    {
+                        await writer.WriteLineAsync("235 Authentication successful");
+                    }
+                    else
+                    {
+                        await writer.WriteLineAsync("535 Authentication credentials invalid");
+                    }
+                }
+                else
+                {
+                    await writer.WriteLineAsync("535 Authentication failed");
+                }
             }
             else
             {

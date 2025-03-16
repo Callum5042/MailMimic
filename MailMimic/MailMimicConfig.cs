@@ -24,4 +24,14 @@ public class MailMimicConfig
     /// Required only if a specific certificate needs to be enforced.
     /// </summary>
     public string SslThumbprint { get; set; }
+
+    /// <summary>
+    /// The username for authentication
+    /// </summary>
+    public string Username { get; set; }
+
+    /// <summary>
+    /// The password for authentication
+    /// </summary>
+    public string Password { get; set; }
 }
