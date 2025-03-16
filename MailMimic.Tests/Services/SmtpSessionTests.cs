@@ -18,7 +18,7 @@ public class SmtpSessionTests
         using var reader = new StreamReader(stream, Encoding.ASCII);
 
         // Act
-        var smtpSession = new SmtpSession(logger, mimicStore);
+        var smtpSession = new SmtpSession(logger, mimicStore, null!);
         await smtpSession.HandleAsync(stream, CancellationToken.None);
 
         // Assert
