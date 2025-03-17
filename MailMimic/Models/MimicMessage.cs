@@ -9,17 +9,17 @@ public class MimicMessage
         Id = Guid.NewGuid();
     }
 
-    public Guid Id { get; private set; }
+    public Guid Id { get; set; }
 
     public IList<string> MailFrom { get; set; } = [];
 
     public IList<string> MailTo { get; set; } = [];
 
-    public string? Source { get; private set; }
+    public string? Source { get; set; }
 
-    public string? Subject { get; private set; }
+    public string? Subject { get; set; }
 
-    public string? Body { get; private set; }
+    public string? Body { get; set; }
 
     public DateTime DateTime { get; set; } = DateTime.UtcNow;
 

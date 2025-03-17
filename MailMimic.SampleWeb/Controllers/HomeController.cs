@@ -1,4 +1,5 @@
 using MailKit.Net.Smtp;
+using MailMimic.MailStores;
 using MailMimic.SampleWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
@@ -7,7 +8,7 @@ namespace MailMimic.SampleWeb.Controllers;
 
 public class HomeController : Controller
 {
-    public IActionResult Index(bool emailSent)
+    public IActionResult Index(bool emailSent, [FromServices] IMimicStore mimicStore)
     {
         ViewBag.EmailSent = emailSent;
 

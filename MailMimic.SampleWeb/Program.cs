@@ -1,5 +1,8 @@
 using MailMimic.Extensions;
 using MailMimic.Portal.Extensions;
+using MailMimic.Storage.Redis;
+using Redis.OM;
+using Redis.OM.Contracts;
 
 namespace MailMimic.SampleWeb;
 
