@@ -29,25 +29,25 @@ public class RedisMimicStore : IMimicStore
         }
     }
 
-    public async Task AddAsync(MimicMessage message)
+    public async Task AddAsync(MimicMessageEntity message)
     {
         var redisMessage = RedisMimicMessage.FromDomain(message);
         await _messages.InsertAsync(redisMessage);
     }
 
-    public async Task<MimicMessage?> FindAsync(Guid id)
+    public async Task<MimicMessageEntity?> FindAsync(Guid id)
     {
         var redisMessage = await _messages.FindByIdAsync(id.ToString());
         return redisMessage?.ToDomain();
     }
 
-    public async Task<ICollection<MimicMessage>> GetAllAsync()
+    public async Task<ICollection<MimicMessageEntity>> GetAllAsync()
     {
         var redisMessages = await _messages.ToListAsync();
         return redisMessages.Select(msg => msg.ToDomain()).ToList();
     }
 
-    public async Task RemoveAsync(MimicMessage message)
+    public async Task RemoveAsync(MimicMessageEntity message)
     {
         var redisMessage = await _messages.FindByIdAsync(message.Id.ToString());
         if (redisMessage is null)

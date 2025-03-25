@@ -1,5 +1,6 @@
 ﻿using MailMimic.MailStores;
 using MailMimic.Portal.Models;
+using MailMimic.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
@@ -9,10 +10,12 @@ namespace MailMimic.Portal.Controllers;
 public class MailboxController : Controller
 {
     private readonly IMimicStore _mimicStore;
+    private readonly ISmtpParser _smtpParser;
 
-    public MailboxController(IMimicStore mimicStore)
+    public MailboxController(IMimicStore mimicStore, ISmtpParser smtpParser)
     {
         _mimicStore = mimicStore;
+        _smtpParser = smtpParser;
     }
 
     public async Task<IActionResult> Index()
@@ -25,7 +28,7 @@ public class MailboxController : Controller
             {
                 Id = x.Id,
                 MailFrom = x.MailFrom.FirstOrDefault(),
-                Subject = x.Subject,
+                Subject = "Boo",
                 Size = $"{Encoding.Unicode.GetByteCount(x.Source ?? string.Empty)} bytes",
                 DateTime = x.DateTime.ToString("yyyy-MM-dd HH:mm:ss"),
             })
@@ -38,6 +41,12 @@ public class MailboxController : Controller
     public async Task<IActionResult> Email(Guid id)
     {
         var model = await _mimicStore.FindAsync(id);
-        return View("~/Views/Mailbox/Email.cshtml", model);
+        if (model == null)
+        {
+            return NotFound();
+        }
+
+        var smtpData = _smtpParser.Parse(model!.Source!);
+        return View("~/Views/Mailbox/Email.cshtml", smtpData);
     }
 }

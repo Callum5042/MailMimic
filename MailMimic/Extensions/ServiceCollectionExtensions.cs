@@ -60,6 +60,7 @@ public static class ServiceCollectionExtensions
         services.AddHostedService<MailExchangeService>();
         services.AddTransient<ICertificateLoader, CertificateLoader>();
         services.AddTransient<ISmtpSession, SmtpSession>();
+        services.AddTransient<ISmtpParser, SmtpParser>();
         services.UseMimicStore<InMemoryMimicStore>();
 
         return services;

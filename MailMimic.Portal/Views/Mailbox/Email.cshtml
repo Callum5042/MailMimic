@@ -1,5 +1,22 @@
-﻿@using MailMimic.Models
-@model MimicMessage
+﻿@using MailMimic
+@using MailMimic.Models
+@using MailMimic.Services
+@model SmtpData
+
+@{
+    var attachmentsCount = 0;
+
+    foreach (var item in Model.Contents)
+    {
+        if (item.Headers.TryGetValue("Content-Disposition", out var value))
+        {
+            if (value.Contains("attachment"))
+            {
+                attachmentsCount++;
+            }
+        }
+    }
+}
 
 <div class="row">
 
@@ -10,17 +27,29 @@
     <strong>Date: @Model.Headers["Date"]</strong>
     <hr />
 
-    @if (Model.Headers["Content-Type"].Contains("text/html"))
+    @if (attachmentsCount > 0)
     {
-        @Html.Raw(Model.Body)
+        <span>Attachments: @attachmentsCount</span>
     }
-    else if (Model.Headers["Content-Type"].Contains("text/plain"))
+
+    @foreach (var content in Model.Contents)
     {
-        <p>@Model.Body</p>
-    }
-    else
-    {
-        <pre>@Model.Source</pre>
+        if (!content.Headers.ContainsKey("Content-Disposition") || content.Headers["Content-Disposition"].Contains(MailMimicConstants.ContentDispositions.Inline))
+        {
+            if (content.Headers["Content-Type"].Contains("text/html"))
+            {
+                @Html.Raw(content.Body)
+            }
+            else if (content.Headers["Content-Type"].Contains("text/plain"))
+            {
+                <p>@content.Body</p>
+            }
+            else
+            {
+                @* Default assumes text/plain *@
+                <p>@content.Body</p>
+            }
+        }
     }
 
 </div>

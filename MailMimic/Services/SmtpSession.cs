@@ -25,7 +25,7 @@ public class SmtpSession : ISmtpSession
         using var reader = new StreamReader(stream, Encoding.ASCII, leaveOpen: true);
         using var writer = new StreamWriter(stream, Encoding.ASCII, leaveOpen: true) { AutoFlush = true };
 
-        var mimicMessage = new MimicMessage();
+        var mimicMessage = new MimicMessageEntity();
 
         // RFC 5321, Section 3 - The SMTP Procedures: An Overview
         // RFC 5321, Section 3.1 - Session Initiation
@@ -86,7 +86,7 @@ public class SmtpSession : ISmtpSession
                     messageBuilder.AppendLine(line);
                 }
 
-                mimicMessage.SetSource(messageBuilder.ToString());
+                mimicMessage.Source = messageBuilder.ToString();
                 await _mimicStore.AddAsync(mimicMessage);
 
                 await writer.WriteLineAsync("250 Message accepted");

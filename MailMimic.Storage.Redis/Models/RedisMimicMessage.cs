@@ -14,7 +14,7 @@ public class RedisMimicMessage
     public string? Content { get; set; }
 
     // Convert from application model
-    public static RedisMimicMessage FromDomain(MimicMessage message)
+    public static RedisMimicMessage FromDomain(MimicMessageEntity message)
     {
         var json = JsonSerializer.Serialize(message);
 
@@ -26,14 +26,14 @@ public class RedisMimicMessage
     }
 
     // Convert back to application model
-    public MimicMessage ToDomain()
+    public MimicMessageEntity ToDomain()
     {
         if (string.IsNullOrEmpty(Content))
         {
             return null!;
         }
 
-        var message = JsonSerializer.Deserialize<MimicMessage>(Content);
+        var message = JsonSerializer.Deserialize<MimicMessageEntity>(Content);
         return message!;
     }
 }
