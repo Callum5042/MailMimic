@@ -4,6 +4,8 @@
 @model SmtpData
 
 @{
+    Layout = "~/Views/Mailbox/_Layout.cshtml";
+
     var attachmentsCount = 0;
 
     foreach (var item in Model.Contents)
