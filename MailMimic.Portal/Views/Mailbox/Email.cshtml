@@ -1,13 +1,13 @@
 ﻿@using MailMimic
 @using MailMimic.Models
 @using MailMimic.Services
+@using System.Text.RegularExpressions
 @model SmtpData
 
 @{
     Layout = "~/Views/Mailbox/_Layout.cshtml";
 
     var attachmentsCount = 0;
-
     foreach (var item in Model.Contents)
     {
         if (item.Headers.TryGetValue("Content-Disposition", out var value))
@@ -29,29 +29,91 @@
     <strong>Date: @Model.Headers["Date"]</strong>
     <hr />
 
-    @if (attachmentsCount > 0)
-    {
-        <span>Attachments: @attachmentsCount</span>
-    }
+    <ul class="nav nav-underline ps-3">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#content" type="button" role="tab">
+                Content
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#source" type="button" role="tab">
+                Source
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#attachments" type="button" role="tab">
+                Attachments
+                <span class="badge text-bg-secondary">@attachmentsCount</span>
+            </button>
+        </li>
+    </ul>
 
-    @foreach (var content in Model.Contents)
-    {
-        if (!content.Headers.ContainsKey("Content-Disposition") || content.Headers["Content-Disposition"].Contains(MailMimicConstants.ContentDispositions.Inline))
-        {
-            if (content.Headers["Content-Type"].Contains("text/html"))
+    <div class="tab-content mt-3">
+        <div class="tab-pane fade show active" id="content" role="tabpanel">
+            @foreach (var content in Model.Contents)
             {
-                @Html.Raw(content.Body)
+                if (!content.Headers.ContainsKey("Content-Disposition") || content.Headers["Content-Disposition"].Contains(MailMimicConstants.ContentDispositions.Inline))
+                {
+                    if (content.Headers["Content-Type"].Contains("text/html"))
+                    {
+                        @Html.Raw(content.Body)
+                    }
+                    else if (content.Headers["Content-Type"].Contains("text/plain"))
+                    {
+                        <p>@content.Body</p>
+                    }
+                    else
+                    {
+                        @* Default assumes text / plain *@
+                        <p>@content.Body</p>
+                    }
+                }
             }
-            else if (content.Headers["Content-Type"].Contains("text/plain"))
-            {
-                <p>@content.Body</p>
-            }
-            else
-            {
-                @* Default assumes text/plain *@
-                <p>@content.Body</p>
-            }
-        }
-    }
+        </div>
+        <div class="tab-pane fade" id="source" role="tabpanel">
+            <pre>@Model.Source</pre>
+        </div>
+        <div class="tab-pane fade" id="attachments" role="tabpanel">
+            <div class="list-group">
+                @foreach (var item in Model.Contents)
+                {
+                    if (item.Headers.TryGetValue("Content-Disposition", out var value))
+                    {
+                        var regex = Regex.Match(value, @".*(filename=)(.+[^;\s])");
+                        var filename = regex.Groups[2].Value;
+
+                        var contentType = "";
+                        item.Headers.TryGetValue("Content-Type", out contentType);
+                        contentType ??= "";
+
+                        if (value.Contains("attachment"))
+                        {
+                            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+                                @if (contentType.Contains("application/zip"))
+                                {
+                                    <i class="bi bi-file-earmark-zip-fill" style="font-size: 2rem"></i>
+                                }
+                                else if (contentType.Contains("text/plain"))
+                                {
+                                    <i class="bi bi-file-earmark-text-fill" style="font-size: 2rem"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-file-earmark-arrow-down-fill" style="font-size: 2rem"></i>
+                                }
+
+                                <div class="d-flex gap-2 w-100 justify-content-between">
+                                    <div>
+                                        <strong class="mb-0">@filename</strong>
+                                        <p class="mb-0 opacity-75">@contentType</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
 
 </div>

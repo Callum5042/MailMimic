@@ -50,3 +50,10 @@ public class MailboxController : Controller
         return View("~/Views/Mailbox/Email.cshtml", smtpData);
     }
 }
+
+//public enum EmailView
+//{
+//    Content,
+//    Source,
+//    Attachments,
+//}
