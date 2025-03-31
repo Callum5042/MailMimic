@@ -18,9 +18,16 @@ public class MailboxController : Controller
         _smtpParser = smtpParser;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? search)
     {
         var mailboxes = await _mimicStore.GetAllAsync();
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            mailboxes = mailboxes
+                .Where(x => x.Source?.Contains(search, StringComparison.OrdinalIgnoreCase) == true)
+                .ToList();
+        }
 
         var model = new MailboxModel
         {
@@ -35,6 +42,12 @@ public class MailboxController : Controller
         };
 
         return View("~/Views/Mailbox/Index.cshtml", model);
+    }
+
+    [HttpPost]
+    public IActionResult Search(string? search)
+    {
+        return RedirectToAction(nameof(Index), new { search });
     }
 
     [Route("[area]/[controller]/{id:guid}")]
