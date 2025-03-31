@@ -10,6 +10,8 @@ public class SmtpData
     public ICollection<SmtpContent> Contents { get; set; } = [];
 
     public string Subject => Headers["Subject"] ?? string.Empty;
+
+    public string? Source { get; set; }
 }
 
 public class SmtpContent
@@ -26,6 +28,7 @@ public class SmtpParser : ISmtpParser
         ParsingHeader = true;
 
         var data = new SmtpData();
+        data.Source = source;
 
         using var reader = new StringReader(source);
 
