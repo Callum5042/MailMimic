@@ -35,7 +35,7 @@ public class MailboxController : Controller
             {
                 Id = x.Id,
                 MailFrom = x.MailFrom.FirstOrDefault(),
-                Subject = "Boo",
+                Subject = new SmtpParser().Parse(x.Source!).Subject,
                 Size = $"{Encoding.Unicode.GetByteCount(x.Source ?? string.Empty)} bytes",
                 DateTime = x.DateTime.ToString("yyyy-MM-dd HH:mm:ss"),
             })
