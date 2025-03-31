@@ -8,4 +8,5 @@ public interface IMimicStore
     Task<MimicMessageEntity?> FindAsync(Guid id);
     Task<ICollection<MimicMessageEntity>> GetAllAsync();
     Task RemoveAsync(MimicMessageEntity message);
+    Task DeleteAll();
 }

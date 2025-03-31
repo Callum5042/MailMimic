@@ -24,7 +24,11 @@
             </form>
 
             <!-- Button (Right) -->
-            <button class="btn btn-outline-danger" type="submit">Clear Mailbox</button>
+            <form role="search" class="mx-auto" asp-area="MailMimic" asp-controller="Mailbox" asp-action="DeleteAll">
+                <button class="btn btn-outline-danger" type="submit">
+                    Clear Mailbox
+                </button>
+            </form>
         </div>
     </nav>
 

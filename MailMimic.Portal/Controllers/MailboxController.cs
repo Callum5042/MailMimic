@@ -50,6 +50,13 @@ public class MailboxController : Controller
         return RedirectToAction(nameof(Index), new { search });
     }
 
+    [HttpPost]
+    public async Task<IActionResult> DeleteAll()
+    {
+        await _mimicStore.DeleteAll();
+        return RedirectToAction(nameof(Index));
+    }
+
     [Route("[area]/[controller]/{id:guid}")]
     public async Task<IActionResult> Email(Guid id)
     {
@@ -63,10 +70,3 @@ public class MailboxController : Controller
         return View("~/Views/Mailbox/Email.cshtml", smtpData);
     }
 }
-
-//public enum EmailView
-//{
-//    Content,
-//    Source,
-//    Attachments,
-//}

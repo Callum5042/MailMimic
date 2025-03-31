@@ -30,4 +30,10 @@ public class InMemoryMimicStore : IMimicStore
         _messages.TryGetValue(id, out var message);
         return Task.FromResult(message);
     }
+
+    public Task DeleteAll()
+    {
+        _messages.Clear();
+        return Task.CompletedTask;
+    }
 }

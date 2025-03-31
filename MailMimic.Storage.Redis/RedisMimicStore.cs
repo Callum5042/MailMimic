@@ -57,4 +57,9 @@ public class RedisMimicStore : IMimicStore
 
         await _messages.DeleteAsync(redisMessage);
     }
+
+    public async Task DeleteAll()
+    {
+        await _messages.DeleteAsync(await _messages.ToListAsync());
+    }
 }
