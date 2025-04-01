@@ -83,8 +83,11 @@ public class SmtpParser : ISmtpParser
                                 {
                                     if (ParsingContentHeader)
                                     {
-                                        var (key, value) = line.SplitKeyValue();
-                                        content!.Headers.TryAdd(key, value);
+                                        if (line.Contains(":"))
+                                        {
+                                            var (key, value) = line.SplitKeyValue();
+                                            content!.Headers.TryAdd(key, value);
+                                        }
                                     }
                                     else
                                     {

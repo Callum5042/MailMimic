@@ -54,17 +54,18 @@ public class HomeController : Controller
         message.Cc.Add(new MailboxAddress("The Architect", "architect@matrix.com"));
         message.Subject = "Quick Send Email Test";
 
-        //message.Body = new TextPart("plain")
-        //{
-        //    Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet rutrum suscipit. Nulla ut turpis nec est finibus posuere ac a velit. Donec aliquet ex sed turpis imperdiet sollicitudin. In euismod, nisl vitae aliquet gravida, eros ex tempus quam, eget congue erat quam vel ex. Suspendisse nec felis nec ligula commodo vehicula. Mauris facilisis augue sem, non cursus metus laoreet ac. Sed sit amet purus scelerisque, efficitur turpis eget, efficitur quam. Vestibulum aliquet orci nec leo iaculis ultrices. Sed in felis congue, scelerisque diam vitae, consectetur arcu. Cras vel enim at velit placerat porttitor. Vestibulum id neque urna. Donec auctor aliquam pellentesque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
-        //};
-
         var bodyBuilder = new BodyBuilder();
-        // bodyBuilder.HtmlBody = "<b>This is some html text</b>";
+        //bodyBuilder.HtmlBody = """
+        //    <h1>Big Heading</h1>
+        //    <b>This is some html text</b>
+        //    """;
         bodyBuilder.TextBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet rutrum suscipit. Nulla ut turpis nec est finibus posuere ac a velit. Donec aliquet ex sed turpis imperdiet sollicitudin. In euismod, nisl vitae aliquet gravida, eros ex tempus quam, eget congue erat quam vel ex. Suspendisse nec felis nec ligula commodo vehicula. Mauris facilisis augue sem, non cursus metus laoreet ac. Sed sit amet purus scelerisque, efficitur turpis eget, efficitur quam. Vestibulum aliquet orci nec leo iaculis ultrices. Sed in felis congue, scelerisque diam vitae, consectetur arcu. Cras vel enim at velit placerat porttitor. Vestibulum id neque urna. Donec auctor aliquam pellentesque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.";
 
-        bodyBuilder.Attachments.Add(@"C:\Temp\test.txt");
-        bodyBuilder.Attachments.Add(@"C:\Temp\test2.zip");
+        //bodyBuilder.Attachments.Add(@"C:\Temp\test.txt");
+        //bodyBuilder.Attachments.Add(@"C:\Temp\test2.zip");
+        //bodyBuilder.Attachments.Add(@"C:\Temp\Trackmania (Steam)2024-5-21-23-10-44.jpg");
+        //bodyBuilder.Attachments.Add(@"C:\Temp\emulator.png");
+        // bodyBuilder.Attachments.Add(@"C:\Temp\Neon Highway v2.mp3");
 
         message.Body = bodyBuilder.ToMessageBody();
 
