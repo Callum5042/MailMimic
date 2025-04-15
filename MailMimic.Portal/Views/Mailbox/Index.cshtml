@@ -19,7 +19,10 @@
                     <td>@item.Size</td>
                     <td>
                         <a class="btn btn-sm btn-outline-info" asp-area="MailMimic" asp-controller="Mailbox" asp-action="Email" asp-route-id="@item.Id">View</a>
-                        <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                        <form asp-controller="Mailbox" asp-action="Delete" class="d-inline">
+                            <input name="Id" value="@item.Id" type="hidden" />
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
             }

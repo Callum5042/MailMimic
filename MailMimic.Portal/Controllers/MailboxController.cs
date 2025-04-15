@@ -1,4 +1,5 @@
 ﻿using MailMimic.MailStores;
+using MailMimic.Models;
 using MailMimic.Portal.Models;
 using MailMimic.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -49,6 +50,19 @@ public class MailboxController : Controller
     public IActionResult Search(string? search)
     {
         return RedirectToAction(nameof(Index), new { search });
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete([FromForm] Guid id)
+    {
+        var message = await _mimicStore.FindAsync(id);
+        if (message is null)
+        {
+            return NotFound();
+        }
+
+        await _mimicStore.RemoveAsync(message);
+        return RedirectToAction(nameof(Index));
     }
 
     [HttpPost]
