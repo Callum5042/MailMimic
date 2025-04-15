@@ -18,7 +18,7 @@
             <!-- Centered Search Form -->
             <form role="search" class="mx-auto" asp-area="MailMimic" asp-controller="Mailbox" asp-action="Search">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="Search">
+                    <input type="text" class="form-control" placeholder="Search" name="Search" value="@ViewBag.Search">
                     <button class="btn btn-outline-secondary" type="submit">Search</button>
                 </div>
             </form>

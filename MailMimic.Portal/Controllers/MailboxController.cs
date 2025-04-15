@@ -41,6 +41,7 @@ public class MailboxController : Controller
             })
         };
 
+        ViewBag.Search = search;
         return View("~/Views/Mailbox/Index.cshtml", model);
     }
 
