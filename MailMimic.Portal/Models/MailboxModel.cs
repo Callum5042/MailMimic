@@ -2,7 +2,7 @@
 
 #nullable disable
 
-public class MailboxModel
+internal class MailboxModel
 {
     public IEnumerable<ListItem> Emails { get; set; } = [];
 
