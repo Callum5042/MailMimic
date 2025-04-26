@@ -8,13 +8,12 @@ Self-hosted solution for testing email functionality in development environments
 - [x] Out of the box setup.
 - [x] Advanced configuration options.
 - [x] Web Portal for managing mailboxes.
-- [ ] SMTP, POP3 and IMAP support.
 - [x] TLS and SSL support.
 
 ## Hosting
 
 - [x] Sidehost with an existing ASP Core application.
-- [ ] Selfhost including Docker support.
+- [ ] Selfhost including Docker support. (Coming soon)
 
 ## Getting Started
 
@@ -35,7 +34,6 @@ var app = builder.Build();
 
 app.MapMailMimicPortal();
 ```
-
 
 ## Configuration
 
@@ -67,4 +65,6 @@ Alternatively, `appsettings.json` can be used to automatically bind the options.
 
 ## Contribution
 
-TODO
+Contributions are welcome!  
+If you have suggestions for improvements, feel free to open an issue or submit a pull request.  
+Please make sure your code follows the project's style and is properly documented.
