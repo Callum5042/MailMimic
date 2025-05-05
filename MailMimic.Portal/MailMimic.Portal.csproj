@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <AssemblyName>RoveTech.$(MSBuildProjectName)</AssemblyName>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
     <RepositoryUrl>https://github.com/Callum5042/MailMimic</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>

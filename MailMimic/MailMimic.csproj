@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyName>RoveTech.$(MSBuildProjectName)</AssemblyName>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Callum5042/MailMimic</RepositoryUrl>
   </PropertyGroup>
