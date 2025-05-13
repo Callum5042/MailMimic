@@ -44,12 +44,12 @@ MailMimic can be configured using the when registering MailMailMimc.
 ```csharp
 builder.Services.AddMailMimic(options =>
 {
-	options.Port = 25;
-	options.Host = "localhost";
-	options.Username = "username";
-	options.Password = "password";
-	options.UseSsl = false;
-	options.UseTls = false;
+    options.Port = 25;
+    options.Host = "localhost";
+    options.Username = "username";
+    options.Password = "password";
+    options.UseSsl = false;
+    options.UseTls = false;
 });
 ```
 
@@ -57,11 +57,11 @@ Alternatively, `appsettings.json` can be used to automatically bind the options.
 
 ```json
 {
-	"MailMimicConfig": {
-		"Port": 465,
-		"UseSsl": true,
-		"SslThumbprint": "5E0FE7037455634B97E60711A215B5879DB0CB4F"
-	}
+  "MailMimicConfig": {
+    "Port": 465,
+    "UseSsl": true,
+    "SslThumbprint": "5E0FE7037455634B97E60711A215B5879DB0CB4F"
+  }
 }
 ```
 
