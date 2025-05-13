@@ -2,6 +2,8 @@
 
 Self-hosted solution for testing email functionality in development environments.
 
+[![.NET](https://github.com/Callum5042/MailMimic/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Callum5042/MailMimic/actions/workflows/dotnet.yml)
+
 ## Features
 
 - [x] Seamless integration into existing applications.
