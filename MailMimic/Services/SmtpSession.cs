@@ -32,7 +32,7 @@ public class SmtpSession : ISmtpSession
         await writer.WriteLineAsync("220 MailMimic SMTP ready");
 
 
-        var line = await reader.ReadLineAsync(cancellationToken);
+        var line = await reader.ReadLineAsync();
         while (!string.IsNullOrEmpty(line))
         {
             _logger.LogInformation("Received: " + line);
@@ -78,7 +78,7 @@ public class SmtpSession : ISmtpSession
 
                 // Read message content until a single dot (".") on a line
                 var messageBuilder = new StringBuilder();
-                while ((line = await reader.ReadLineAsync(cancellationToken)) != null)
+                while ((line = await reader.ReadLineAsync()) != null)
                 {
                     if (line == ".")
                         break;
@@ -131,7 +131,7 @@ public class SmtpSession : ISmtpSession
             }
 
             // Try get next line
-            line = await reader.ReadLineAsync(cancellationToken);
+            line = await reader.ReadLineAsync();
         }
     }
 }
