@@ -3,9 +3,11 @@
 
 @{
     ViewData["Title"] = "Send Email";
+
+    var emailSent = ViewBag?.EmailSent ?? false;
 }
 
-@if (ViewBag.EmailSent)
+@if (emailSent)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Email sent successfully!</strong>
@@ -20,11 +22,13 @@
         <div class="form-group col-md-6">
             <label asp-for="MailFrom"></label>
             <input asp-for="MailFrom" class="form-control" />
+            <span asp-validation-for="MailFrom" class="text-danger"></span>
         </div>
 
         <div class="form-group col-md-6">
             <label asp-for="MailTo"></label>
             <input asp-for="MailTo" class="form-control" />
+            <span asp-validation-for="MailTo" class="text-danger"></span>
         </div>
 
     </div>

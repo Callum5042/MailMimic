@@ -25,8 +25,14 @@
     <h2>@Model.Subject</h2>
     <strong>From: @Model.Headers["From"]</strong>
     <strong>To: @Model.Headers["To"]</strong>
-    <strong>Cc: @Model.Headers["Cc"]</strong>
-    <strong>Date: @Model.Headers["Date"]</strong>
+    @if (Model.Headers.ContainsKey("Cc"))
+    {
+        <strong>Cc: @Model.Headers["Cc"]</strong>
+    }
+    @if (Model.Headers.ContainsKey("Date"))
+    {
+        <strong>Cc: @Model.Headers["Date"]</strong>
+    }
     <hr />
 
     <ul class="nav nav-underline ps-3">
