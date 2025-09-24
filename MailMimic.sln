@@ -5,8 +5,8 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solution Items", "{B4E33385-285D-436B-8AD3-53897545C38A}"
 	ProjectSection(SolutionItems) = preProject
-		Directory.Build.props = Directory.Build.props
 		README.md = README.md
+		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMimic.Portal", "MailMimic.Portal\MailMimic.Portal.csproj", "{B1175D3E-8137-4E44-9937-FED8B7EB6F22}"
