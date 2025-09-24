@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4E33385-285D-436B-8AD3-53897545C38A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solution Items", "{B4E33385-285D-436B-8AD3-53897545C38A}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 		Directory.Build.props = Directory.Build.props
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMimic.Tests", "MailMimic.Tests\MailMimic.Tests.csproj", "{C5F31A29-5549-486A-8E2A-7381AC7A39E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailMimic.Storage.Redis", "MailMimic.Storage.Redis\MailMimic.Storage.Redis.csproj", "{5AEAC8FC-50E6-4776-A0DB-534339F96BAF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B5DC7666-A112-49E8-94B5-403163F0F50D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{C75E31EB-0A37-2755-72EB-496B3B4A7CC5} = {B5DC7666-A112-49E8-94B5-403163F0F50D}
 		{C5F31A29-5549-486A-8E2A-7381AC7A39E9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
