@@ -15,7 +15,7 @@ Self-hosted solution for testing email functionality in development environments
 ## Hosting
 
 - [x] Sidehost with an existing ASP Core application.
-- [ ] Selfhost including Docker support. (Coming soon)
+- [x] Self-host with Docker.
 
 ## Getting Started
 
@@ -36,6 +36,10 @@ var app = builder.Build();
 
 app.MapMailMimicPortal();
 ```
+
+
+| ![Mail Mimic Dashboard](mail-mimic-dashboard.jpg) | ![Mail Mimic Email View](mail-mimic-email-view.jpg)  |
+|----------|----------|
 
 ## Configuration
 
