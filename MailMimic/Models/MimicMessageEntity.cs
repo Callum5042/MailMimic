@@ -21,12 +21,12 @@ public class MimicMessageEntity
     /// <summary>
     /// The sender of the message read from the SMTP MAIL FROM command.
     /// </summary>
-    public IList<string> MailFrom { get; set; } = [];
+    public IList<string> MailFrom { get; set; } = new List<string>();
 
     /// <summary>
     /// The recipients of the message read from the SMTP RCPT TO command.
     /// </summary>
-    public IList<string> MailTo { get; set; } = [];
+    public IList<string> MailTo { get; set; } = new List<string>();
 
     /// <summary>
     /// The source of the message read from the SMTP DATA command.

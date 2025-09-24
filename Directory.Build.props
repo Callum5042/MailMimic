@@ -1,0 +1,12 @@
+﻿<Project>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
+  </ItemGroup>
+
+</Project>

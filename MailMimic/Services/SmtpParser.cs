@@ -7,7 +7,7 @@ public class SmtpData
 {
     public IDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
 
-    public ICollection<SmtpContent> Contents { get; set; } = [];
+    public IList<SmtpContent> Contents { get; set; } = new List<SmtpContent>();
 
     public string Subject => Headers["Subject"] ?? string.Empty;
 
