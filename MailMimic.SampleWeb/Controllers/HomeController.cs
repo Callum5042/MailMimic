@@ -18,16 +18,24 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> SendEmail([FromForm] SendEmailModel model)
     {
+        if (!ModelState.IsValid)
+        {
+            return View("Index", model);
+        }
+
         // Build the email
         var message = new MimeMessage();
         message.From.Add(new MailboxAddress(model.MailFrom, model.MailFrom));
         message.To.Add(new MailboxAddress(model.MailTo, model.MailTo));
         message.Subject = model.Subject;
 
-        message.Body = new TextPart("plain")
+        if (!string.IsNullOrWhiteSpace(model.Body))
         {
-            Text = model.Body,
-        };
+            message.Body = new TextPart("plain")
+            {
+                Text = model.Body,
+            };
+        }
 
         // Send the email
         using var client = new SmtpClient();
@@ -36,9 +44,9 @@ public class HomeController : Controller
         await client.DisconnectAsync(true);
 
         // Redirect back to the index page
-        return RedirectToAction(nameof(Index), new 
-        { 
-            emailSent = true 
+        return RedirectToAction(nameof(Index), new
+        {
+            emailSent = true
         });
     }
 
@@ -73,9 +81,9 @@ public class HomeController : Controller
         await client.DisconnectAsync(true);
 
         // Redirect back to the index page
-        return RedirectToAction(nameof(Index), new 
-        { 
-            emailSent = true 
+        return RedirectToAction(nameof(Index), new
+        {
+            emailSent = true
         });
     }
 }
