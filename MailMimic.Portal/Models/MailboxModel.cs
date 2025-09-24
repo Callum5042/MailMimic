@@ -4,7 +4,7 @@
 
 internal class MailboxModel
 {
-    public IEnumerable<ListItem> Emails { get; set; } = [];
+    public IEnumerable<ListItem> Emails { get; set; } = new List<ListItem>();
 
     public class ListItem
     {
