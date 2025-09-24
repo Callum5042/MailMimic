@@ -19,4 +19,13 @@
     <ProjectReference Include="..\MailMimic\MailMimic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Attachments\test.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Attachments\test2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
