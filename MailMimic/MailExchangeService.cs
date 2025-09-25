@@ -30,7 +30,8 @@ public class MailExchangeService : BackgroundService
         using var scope = _logger.BeginScope("{Service}", nameof(MailExchangeService));
         _logger.LogInformation("starting SMTP server");
 
-        var tcpServer = new TcpListener(IPAddress.Any, _options.Value.Port);
+        var ipAddressType = _options.Value.ListenOnAllInterfaces ? IPAddress.Any : IPAddress.Loopback;
+        var tcpServer = new TcpListener(ipAddressType, _options.Value.Port);
         tcpServer.Start();
 
         _logger.LogInformation("SMTP server is running");

@@ -34,4 +34,9 @@ public class MailMimicConfig
     /// The password for authentication
     /// </summary>
     public string Password { get; set; }
+
+    /// <summary>
+    /// True to listen on all network interfaces; false to listen only on the loopback interface (127.0.0.1).
+    /// </summary>
+    public bool ListenOnAllInterfaces { get; set; }
 }
