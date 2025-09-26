@@ -3,6 +3,7 @@
 Self-hosted solution for testing email functionality in development environments.
 
 [![.NET](https://github.com/Callum5042/MailMimic/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Callum5042/MailMimic/actions/workflows/dotnet.yml)
+[![nuget](https://img.shields.io/nuget/v/MailMimic)](https://www.nuget.org/packages/MailMimic)
 
 ## Features
 
