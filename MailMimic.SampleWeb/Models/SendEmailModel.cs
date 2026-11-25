@@ -14,7 +14,6 @@ public class SendEmailModel
     [Required]
     public string MailFrom { get; set; }
 
-    [Required]
     public string Subject { get; set; }
 
     public string Body { get; set; }
