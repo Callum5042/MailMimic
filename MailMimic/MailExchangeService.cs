@@ -42,8 +42,9 @@ public class MailExchangeService : BackgroundService
 
             _logger.LogInformation("Client connected");
 
-            // Handle the SMTP session
-            _ = Task.Run(() => HandleSmtpSession(client, stoppingToken), stoppingToken);
+            // Handle the SMTP session. Not passing the token to Task.Run: if it were cancelled before the
+            // delegate starts, the delegate would never run and the client would never be disposed.
+            _ = Task.Run(() => HandleSmtpSession(client, stoppingToken), CancellationToken.None);
         }
     }
 
@@ -67,7 +68,15 @@ public class MailExchangeService : BackgroundService
             var serverCertificate = GetX509Certificate();
 
             var sslStream = new SslStream(client.GetStream(), false);
-            await sslStream.AuthenticateAsServerAsync(serverCertificate, clientCertificateRequired: false, SslProtocols.Tls12, true);
+            try
+            {
+                await sslStream.AuthenticateAsServerAsync(serverCertificate, clientCertificateRequired: false, SslProtocols.Tls12, true);
+            }
+            catch
+            {
+                await sslStream.DisposeAsync();
+                throw;
+            }
 
             return sslStream;
         }
@@ -77,10 +86,25 @@ public class MailExchangeService : BackgroundService
 
     private async Task HandleSmtpSession(TcpClient client, CancellationToken cancellationToken)
     {
-        using var stream = await GetClientStreamAsync(client);
-        await _smtpSession.HandleAsync(stream, cancellationToken);
-
-        _logger.LogInformation("Client disconnected");
-        client.Dispose();
+        using (client)
+        {
+            try
+            {
+                await using var stream = await GetClientStreamAsync(client);
+                await _smtpSession.HandleAsync(stream, cancellationToken);
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+            {
+                // Server is shutting down
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "SMTP session failed");
+            }
+            finally
+            {
+                _logger.LogInformation("Client disconnected");
+            }
+        }
     }
 }
